@@ -9,5 +9,6 @@ const server = awsServerlessExpress.createServer(app, null, binaryMimeTypes);
 
 exports.handler = (event, context) => {
   console.log(event);
+
   return awsServerlessExpress.proxy(server, event, context);
 };
