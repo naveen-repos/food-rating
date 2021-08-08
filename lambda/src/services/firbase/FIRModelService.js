@@ -2,7 +2,6 @@ const { values, clone } = require('ramda');
 const { FirebaseDbChild } = require('./firebase');
 
 const findById = async (modelName, id) => {
-  
   const modelRef = FirebaseDbChild(modelName);
   const snapshot = await modelRef.child(id).once('value');
   const data = snapshot.val();
