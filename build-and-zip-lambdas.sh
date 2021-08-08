@@ -16,7 +16,7 @@ cd ..
 zip -r ${distFolder}/layer.zip nodejs/*
 
 # switch to lambdas directory
-cd ${base_dir}/lambdas/src
+cd ${base_dir}/lambda/src
 
 #zip public-cache
 zip -r ${distFolder}/food-rating.zip ./* -x */tests/* 
