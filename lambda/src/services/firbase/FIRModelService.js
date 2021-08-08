@@ -10,7 +10,10 @@ const findById = async (modelName, id) => {
   if (data) {
     return { data, message: null };
   } else {
-    return { data: null, message: `No ${modelName} with id: ${id}` };
+    return {
+      data: null,
+      message: `No ${modelName} with id: ${id}`,
+    };
   }
 };
 
