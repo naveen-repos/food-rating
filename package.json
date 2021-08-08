@@ -4,6 +4,9 @@
     "description": "",
     "main": "src/server.js",
     "keywords": [],
+    "scripts": {
+        "prepare": "husky install"
+    },
     "author": "",
     "license": "ISC",
     "dependencies": {
