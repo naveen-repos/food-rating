@@ -1,0 +1,40 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - staging
+
+# name: Manual Deployment stg
+# on: [workflow_dispatch]
+
+jobs:
+  Terraform:
+    name: Terraform Plan & Apply
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout Repo
+      uses: actions/checkout@v2
+
+    - name: Terraform Setup
+      uses: hashicorp/setup-terraform@v1
+    
+    - name: build and zip
+      run : sh build-and-zip-lambdas.sh
+
+    - name: Deploy stg
+      run: |
+        cd infra
+        terraform init
+        terraform workspace select stg || terraform workspace new stg
+        terraform init
+        terraform plan -out=plan.tfplan
+        terraform apply -auto-approve
+        
+      env:
+        TF_ACTION_WORKING_DIR: '.'
+        AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        
+        
