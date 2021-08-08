@@ -22,6 +22,11 @@ resource "aws_iam_role_policy_attachment" "lambda_vpc_basic_excution_policy_atta
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
 }
 
+resource "aws_iam_role_policy_attachment" "secret_manager_read_write_policy_attachment" {
+  role       = aws_iam_role.food_rating.id
+  policy_arn = "arn:aws:iam::aws:policy/SecretsManagerReadWrite"
+}
+
 resource "aws_iam_role" "food_rating_gateway_role" {
   name               = "${terraform.workspace}_food_rating_gateway_role"
   assume_role_policy = <<EOF

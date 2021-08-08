@@ -1,8 +1,16 @@
 const express = require('express');
+const { setUpEnvironment } = require('./utils/secret-manager');
 const app = express();
-
+require('dotenv').config();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.use(async function (req, res, next) {
+  if (process.env.environment !== 'local') {
+    await setUpEnvironment();
+  }
+  next();
+});
 
 app.get('/time', async (req, res) => {
   console.log('time reached');

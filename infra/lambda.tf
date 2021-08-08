@@ -17,5 +17,9 @@ resource "aws_lambda_function" "food_rating" {
   source_code_hash = filebase64sha256("../lambdas/dist/food-rating.zip")
   timeout          = 30
   memory_size      = 1024
-
+environment {
+  variables = {
+    serectId = "stg-food-rating"
+  }
+}
 }
