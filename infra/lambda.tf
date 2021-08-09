@@ -13,8 +13,8 @@ resource "aws_lambda_function" "food_rating" {
   role             = aws_iam_role.food_rating.arn
   runtime          = "nodejs12.x"
   layers           = [aws_lambda_layer_version.layer.arn]
-  filename         = "../lambdas/dist/food-rating.zip"
-  source_code_hash = filebase64sha256("../lambdas/dist/food-rating.zip")
+  filename         = "../lambda/dist/food-rating.zip"
+  source_code_hash = filebase64sha256("../lambda/dist/food-rating.zip")
   timeout          = 30
   memory_size      = 1024
 environment {

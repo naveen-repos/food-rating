@@ -2,7 +2,7 @@
 #!/bin/bash
 
 export base_dir=$(git rev-parse --show-toplevel)
-export distFolder=${base_dir}/lambdas/dist
+export distFolder=${base_dir}/lambda/dist
 
 mkdir -p ${distFolder}
 
