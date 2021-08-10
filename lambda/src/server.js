@@ -11,12 +11,11 @@ app.use(async function (req, res, next) {
   }
   next();
 });
+/***************** Routes Imports *****************/
+const sessionRoutes = require('./routes/session');
 
-app.get('/time', async (req, res) => {
-  console.log('time reached');
-
-  res.status(200).send({ isSuccessful: true, data: 'from the api' });
-});
+/***************** Assigning routes to express *****************/
+app.use('/session', sessionRoutes);
 
 app.get('/hc', (req, res) => {
   res.status(200).send('success');
