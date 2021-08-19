@@ -44,13 +44,18 @@ const executeController = ({
     );
     try {
       const inputs = parseInputFromRequest(req);
-      const { data: validatedInput, message: validationError } = validator({
-        inputs,
-        inputValidator,
-      });
-
-      if (validationError) {
-        return clientError({ message: validationError });
+      let validatedInput = {};
+      if (inputValidator) {
+        const { data: validatedResponse, message: validationError } = validator(
+          {
+            inputs,
+            inputValidator,
+          }
+        );
+        if (validationError) {
+          return clientError({ message: validationError });
+        }
+        validatedInput = validatedResponse;
       }
 
       let organization = { id: 'dummyOrganizationId' };

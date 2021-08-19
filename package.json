@@ -7,7 +7,7 @@
     "scripts": {
         "prepare": "husky install"
     },
-    "author": "",
+    "author": "Naveen Kandula",
     "license": "ISC",
     "dependencies": {
         "aws-serverless-express": "^3.4.0",
