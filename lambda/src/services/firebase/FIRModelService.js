@@ -1,5 +1,6 @@
-const { values, clone, mergeDeepRight } = require('ramda');
+const { values, clone, reject, isNil, mergeDeepRight } = require('ramda');
 const { FirebaseDbChild } = require('./firebase');
+const removeNull = reject(isNil);
 
 const findById = async (modelName, id) => {
   const modelRef = FirebaseDbChild(modelName);
@@ -54,7 +55,9 @@ const update = async (modelName, data) => {
     };
   }
   const { data: old } = await findById(modelName, data.id);
-  let updatedData = mergeDeepRight(old, data);
+  console.log({ old, data });
+  let updatedData = mergeDeepRight(old, removeNull(data));
+  console.log({ updatedData });
   updatedData = populateUpdateFields(updatedData);
   await modelRef.child(data.id).set(updatedData);
   return { data: updatedData, message: null };

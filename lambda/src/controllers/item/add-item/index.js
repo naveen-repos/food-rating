@@ -7,14 +7,14 @@ module.exports = {
   sanitizer,
   authorizationRequired: false,
   fn: async ({
-    inputs: { name, image, categoryId },
+    inputs: { name, categoryId },
     responses: { success },
     organization: { id: organizationId },
   }) => {
-    const item = await createItem({
+    //todo : need to store the image and recurring patters
+    const { data: item } = await createItem({
       name,
       categoryId,
-      image,
       organizationId,
     });
 

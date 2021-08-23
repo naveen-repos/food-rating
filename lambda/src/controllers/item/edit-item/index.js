@@ -7,7 +7,7 @@ module.exports = {
   sanitizer,
   authorizationRequired: false,
   fn: async ({
-    inputs: { ItemId, name, categoryId, image },
+    inputs: { itemId, name, categoryId, image },
     responses: { success, clientError },
     organization: { id: organizationId },
   }) => {
@@ -15,7 +15,7 @@ module.exports = {
       name,
       categoryId,
       image,
-      ItemId,
+      itemId,
       organizationId,
     });
 
