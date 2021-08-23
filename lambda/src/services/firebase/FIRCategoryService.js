@@ -2,10 +2,9 @@ const { values } = require('ramda');
 const { create, update, remove, fetch } = require('./FIRModelService');
 const { category } = require('./model-paths');
 
-const createCategory = ({ organizationId, items, day }) =>
+const createCategory = ({ organizationId, name }) =>
   create(category({ organizationId }), {
-    items,
-    day,
+    name,
   });
 
 const editCategory = ({ organizationId, categoryId, name }) =>

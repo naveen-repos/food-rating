@@ -13,11 +13,11 @@ module.exports = {
     responses: { success },
     organization: { id: organizationId },
   }) => {
-    const category = await createCategory({
+    const { data: category } = await createCategory({
       name,
       organizationId,
     });
-
-    return success({ category });
+    console.log({ category });
+    return success({ data: category });
   },
 };
