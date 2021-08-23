@@ -20,10 +20,10 @@ module.exports = {
       menuId,
     });
     if (getMenuError) {
-      clientError({ message: getMenuError });
+      return clientError({ message: getMenuError });
     }
-    if (menu.data < Date.now()) {
-      clientError({ message: "Sorry You can't delete the past menu." });
+    if (menu.day < Date.now()) {
+      return clientError({ message: "Sorry You can't delete the past menu." });
     }
 
     const { data: deletedMenu, message: deleteMenuError } = await deleteMenu({
@@ -32,7 +32,7 @@ module.exports = {
       menuId,
     });
     if (deleteMenuError) {
-      clientError({ message: deleteMenuError });
+      return clientError({ message: deleteMenuError });
     }
 
     return success({ data: deletedMenu });

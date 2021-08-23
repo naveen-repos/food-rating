@@ -11,7 +11,7 @@ module.exports = {
     responses: { success, clientError },
     organization: { id: organizationId },
   }) => {
-    const { data: updatedMenu, message: updateMenuError } = editMenu({
+    const { data: updatedMenu, message: updateMenuError } = await editMenu({
       sessionId,
       menuId,
       organizationId,

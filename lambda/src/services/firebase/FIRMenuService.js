@@ -24,6 +24,7 @@ const getMenusForSession = async ({ sessionId, organizationId }) => {
   const { data: menus } = await fetch(menu({ sessionId, organizationId }));
   return { data: values(menus), message: null };
 };
+
 const getMenuById = ({ organizationId, sessionId, menuId }) =>
   findById(menu({ sessionId, organizationId }), menuId);
 

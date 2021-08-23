@@ -1,11 +1,13 @@
+const { inputValidator } = require('./input');
 const { sanitizer } = require('./sanitizer');
 const {
   getMenusForSession,
 } = require('../../../services/firebase/FIRMenuService');
 
 module.exports = {
+  inputValidator,
   sanitizer,
-  authorizationRequired: true,
+  authorizationRequired: false,
   fn: async ({
     inputs: { sessionId },
     responses: { success },

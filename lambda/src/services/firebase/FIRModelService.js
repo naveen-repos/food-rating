@@ -55,9 +55,7 @@ const update = async (modelName, data) => {
     };
   }
   const { data: old } = await findById(modelName, data.id);
-  console.log({ old, data });
   let updatedData = mergeDeepRight(old, removeNull(data));
-  console.log({ updatedData });
   updatedData = populateUpdateFields(updatedData);
   await modelRef.child(data.id).set(updatedData);
   return { data: updatedData, message: null };

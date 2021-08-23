@@ -11,7 +11,7 @@ module.exports = {
     responses: { success, clientError },
     organization: { id: organizationId },
   }) => {
-    const { data: menu, message: getMenuError } = getMenuById({
+    const { data: menu, message: getMenuError } = await getMenuById({
       sessionId,
       menuId,
       organizationId,

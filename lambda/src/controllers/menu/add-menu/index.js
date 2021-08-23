@@ -5,19 +5,21 @@ const { createMenu } = require('../../../services/firebase/FIRMenuService');
 module.exports = {
   inputValidator,
   sanitizer,
-  authorizationRequired: true,
+  authorizationRequired: false,
   fn: async ({
     inputs: { items, day, sessionId },
     responses: { success },
     organization: { id: organizationId },
   }) => {
-    const session = await createMenu({
+    console.log('Reached add menu');
+    console.log({ items, day, sessionId });
+    const { data: menu } = await createMenu({
       items,
       day,
       sessionId,
       organizationId,
     });
 
-    return success({ data: session });
+    return success({ data: menu });
   },
 };
