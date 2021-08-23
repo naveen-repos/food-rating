@@ -14,7 +14,12 @@ module.exports = {
     organization: { id: organizationId },
   }) => {
     await Promise.all(
-      reviews.map((review) => storeRecipeReview({ organizationId, review }))
+      reviews.map((review) =>
+        storeRecipeReview({
+          organizationId,
+          review: { ...review, type: 'item' },
+        })
+      )
     );
     return success({});
   },

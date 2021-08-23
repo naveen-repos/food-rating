@@ -1,6 +1,10 @@
 const { create } = require('./FIRModelService');
-const { rating } = require('./model-paths');
+const { review: reviewPath } = require('./model-paths');
 
 const storeRecipeReview = ({ organizationId, review }) =>
-  create(rating({ organizationId }), review);
-module.exports = { storeRecipeReview };
+  create(reviewPath({ organizationId }), review);
+
+const storeMenuReview = ({ organizationId, review }) =>
+  create(reviewPath({ organizationId }), review);
+
+module.exports = { storeRecipeReview, storeMenuReview };

@@ -11,11 +11,12 @@ app.use(async function (req, res, next) {
   }
   next();
 });
-/***************** Routes Imports *****************/
-const sessionRoutes = require('./routes/session');
 
-/***************** Assigning routes to express *****************/
-app.use('/session', sessionRoutes);
+app.use('/session', require('./routes/session'));
+app.use('/menu', require('./routes/menu'));
+app.use('/item', require('./routes/item'));
+app.use('/category', require('./routes/category'));
+app.use('/review', require('./routes/review'));
 
 app.get('/hc', (req, res) => {
   res.status(200).send('success');

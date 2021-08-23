@@ -19,6 +19,7 @@ const updateItem = ({ name, image, categoryId, itemId, organizationId }) =>
 
 const getItems = async ({ organizationId }) => {
   const { data: items = {} } = await fetch(item({ organizationId }));
+  //need to deleted items?
   return { data: values(items) };
 };
 
