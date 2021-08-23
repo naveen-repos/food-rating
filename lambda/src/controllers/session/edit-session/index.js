@@ -9,7 +9,7 @@ module.exports = {
   sanitizer,
   authorizationRequired: false,
   fn: async ({
-    inputs: { sessionId, name, startTime, image },
+    inputs: { sessionId, name, startTime },
     responses: { success, clientError },
     organization: { id: organizationId },
   }) => {
@@ -17,7 +17,6 @@ module.exports = {
       await updateOrganizationSession({
         name,
         startTime,
-        image,
         sessionId,
         organizationId,
       });

@@ -9,14 +9,13 @@ module.exports = {
   sanitizer,
   authorizationRequired: false,
   fn: async ({
-    inputs: { name, startTime, image },
+    inputs: { name, startTime },
     responses: { success },
     organization: { id: organizationId },
   }) => {
-    const session = await createOrganizationSession({
+    const { data: session } = await createOrganizationSession({
       name,
       startTime,
-      image,
       organizationId,
     });
 

@@ -9,12 +9,14 @@ module.exports = {
   sanitizer,
   authorizationRequired: false,
   fn: async ({
+    inputs: { sessionId },
     responses: { success, clientError },
     organization: { id: organizationId },
   }) => {
     const { data: session, message: deleteSessionError } =
       await deleteOrganizationSessions({
         organizationId,
+        sessionId,
       });
 
     if (deleteSessionError) {

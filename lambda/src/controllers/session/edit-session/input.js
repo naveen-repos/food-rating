@@ -2,6 +2,6 @@ const Joi = require('Joi');
 const inputValidator = Joi.object({
   name: Joi.string(),
   startTime: Joi.number(),
-  image: Joi.string(),
+  sessionId: Joi.string().required(),
 });
 module.exports = { inputValidator };

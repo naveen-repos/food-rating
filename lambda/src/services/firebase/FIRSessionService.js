@@ -2,17 +2,11 @@ const { values, filter, propEq, pipe } = require('ramda');
 const { create, update, fetch } = require('./FIRModelService');
 const { session } = require('./model-paths');
 
-const createOrganizationSession = ({
-  name,
-  startTime,
-  image,
-  organizationId,
-}) =>
+const createOrganizationSession = ({ name, startTime, organizationId }) =>
   create(session({ organizationId }), {
     name,
     startTime,
     status: 'ACTIVE',
-    image,
   });
 
 const updateOrganizationSession = ({
