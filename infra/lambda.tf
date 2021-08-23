@@ -1,7 +1,7 @@
 
 resource "aws_lambda_layer_version" "layer" {
-  filename            = "../lambdas/dist/layer.zip"
-  source_code_hash    = filebase64sha256("../lambdas/dist/layer.zip")
+  filename            = "../lambda/dist/layer.zip"
+  source_code_hash    = filebase64sha256("../lambda/dist/layer.zip")
   layer_name          = "${terraform.workspace}_food_rating_layer"
   compatible_runtimes = [ "nodejs12.x" , "nodejs14.x"]
 }
