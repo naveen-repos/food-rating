@@ -2,7 +2,7 @@ const { inputValidator } = require('./input');
 const { sanitizer } = require('./sanitizer');
 const {
   createOrganizationSession,
-} = require('../../services/firebase/FIRSessionService');
+} = require('../../../services/firebase/FIRSessionService');
 
 module.exports = {
   inputValidator,

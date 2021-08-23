@@ -6,10 +6,10 @@ const review = Joi.object({
   sessionId: Joi.string().required(),
   rating: Joi.number(),
   comment: Joi.string(),
-  actionTags: Joi.Array(),
-  reviewTags: Joi.Array(),
+  actionTags: Joi.array(),
+  reviewTags: Joi.array(),
 });
 
-const inputValidator = Joi.array(review).required();
+const inputValidator = Joi.array().items(review).required();
 
 module.exports = { inputValidator };

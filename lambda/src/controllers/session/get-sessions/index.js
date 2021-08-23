@@ -1,7 +1,7 @@
 const { sanitizer } = require('./sanitizer');
 const {
   getOrganizationSessions,
-} = require('../../services/firebase/FIRSessionService');
+} = require('../../../services/firebase/FIRSessionService');
 
 module.exports = {
   sanitizer,
