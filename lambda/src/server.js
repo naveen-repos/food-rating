@@ -17,6 +17,7 @@ app.use('/menu', require('./routes/menu'));
 app.use('/item', require('./routes/item'));
 app.use('/category', require('./routes/category'));
 app.use('/review', require('./routes/review'));
+app.use('/organization', require('./routes/organization'));
 
 app.get('/hc', (req, res) => {
   res.status(200).send('success');

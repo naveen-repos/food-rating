@@ -1,7 +1,18 @@
-const { findById } = require('./FIRModelService');
+const { findById, create } = require('./FIRModelService');
+const { ORGANIZATION } = require('./model-paths');
 
-const getOrganizationById = (orgId) => findById('organization', orgId);
+const addOrganization = ({ name, adminName, email, type, organizationId }) =>
+  create(ORGANIZATION, {
+    id: organizationId,
+    name,
+    adminName,
+    email,
+    type,
+  });
+
+const getOrganizationById = (orgId) => findById(ORGANIZATION, orgId);
 
 module.exports = {
   getOrganizationById,
+  addOrganization,
 };
