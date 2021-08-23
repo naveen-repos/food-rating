@@ -16,6 +16,6 @@ module.exports = {
       sessionId,
     });
 
-    return success({ menus });
+    return success({ data: menus });
   },
 };

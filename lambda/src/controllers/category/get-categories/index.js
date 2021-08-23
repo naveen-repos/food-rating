@@ -14,6 +14,6 @@ module.exports = {
       organizationId,
     });
 
-    return success({ categories });
+    return success({ data: categories });
   },
 };

@@ -23,6 +23,6 @@ module.exports = {
       clientError({ message: updateItemError });
     }
 
-    return success({ item: updatedItem });
+    return success({ data: updatedItem });
   },
 };

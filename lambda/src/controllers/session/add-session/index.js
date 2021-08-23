@@ -20,6 +20,6 @@ module.exports = {
       organizationId,
     });
 
-    return success({ session });
+    return success({ data: session });
   },
 };

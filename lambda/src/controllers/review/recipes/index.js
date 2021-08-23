@@ -21,6 +21,6 @@ module.exports = {
         })
       )
     );
-    return success({});
+    return success({ data: { message: 'Review stored successful' } });
   },
 };

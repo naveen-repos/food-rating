@@ -17,6 +17,6 @@ module.exports = {
       organizationId,
       review: { rating, comment, menuId, sessionId, type: 'menu' },
     });
-    return success({ review });
+    return success({ data: review });
   },
 };

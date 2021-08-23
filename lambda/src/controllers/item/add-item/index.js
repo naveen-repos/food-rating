@@ -18,6 +18,6 @@ module.exports = {
       organizationId,
     });
 
-    return success({ item });
+    return success({ data: item });
   },
 };

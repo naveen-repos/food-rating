@@ -7,21 +7,20 @@ const {
 module.exports = {
   inputValidator,
   sanitizer,
-  authorizationRequired: true,
+  authorizationRequired: false,
   fn: async ({
     inputs: { categoryId },
     responses: { success, clientError },
     organization: { id: organizationId },
   }) => {
-    const { data: category, message: deleteCategoryError } =
-      await deleteCategory({
-        organizationId,
-        categoryId,
-      });
+    const { message: deleteCategoryError } = await deleteCategory({
+      organizationId,
+      categoryId,
+    });
 
     if (deleteCategoryError) {
       clientError({ message: deleteCategoryError });
     }
-    return success({ category });
+    return success({ data: { message: 'deleted successful' } });
   },
 };

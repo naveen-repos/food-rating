@@ -20,6 +20,6 @@ module.exports = {
     if (getMenuError) {
       clientError({ message: getMenuError });
     }
-    return success({ menu });
+    return success({ data: menu });
   },
 };

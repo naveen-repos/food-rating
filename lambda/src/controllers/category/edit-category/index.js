@@ -7,7 +7,7 @@ const {
 module.exports = {
   inputValidator,
   sanitizer,
-  authorizationRequired: true,
+  authorizationRequired: false,
   fn: async ({
     inputs: { name, categoryId },
     responses: { success, clientError },
@@ -24,6 +24,6 @@ module.exports = {
       clientError({ message: updatedCategoryError });
     }
 
-    return success({ category: updatedCategory });
+    return success({ data: updatedCategory });
   },
 };

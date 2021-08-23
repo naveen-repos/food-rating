@@ -22,6 +22,6 @@ module.exports = {
     if (updateMenuError) {
       clientError({ message: updateMenuError });
     }
-    return success({ menu: updatedMenu });
+    return success({ data: updatedMenu });
   },
 };

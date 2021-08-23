@@ -24,6 +24,6 @@ module.exports = {
     if (updateSessionError) {
       clientError({ message: updateSessionError });
     }
-    return success({ session: updatedSession });
+    return success({ data: updatedSession });
   },
 };

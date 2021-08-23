@@ -19,6 +19,6 @@ module.exports = {
     if (deleteItemError) {
       clientError({ message: deleteItemError });
     }
-    return success({ item });
+    return success({ data: item });
   },
 };

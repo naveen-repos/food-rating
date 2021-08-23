@@ -12,6 +12,6 @@ module.exports = {
       organizationId,
     });
 
-    return success({ items });
+    return success({ data: items });
   },
 };

@@ -35,6 +35,6 @@ module.exports = {
       clientError({ message: deleteMenuError });
     }
 
-    return success({ menu: deletedMenu });
+    return success({ data: deletedMenu });
   },
 };

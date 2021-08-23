@@ -20,6 +20,6 @@ module.exports = {
     if (deleteSessionError) {
       clientError({ message: deleteSessionError });
     }
-    return success({ session });
+    return success({ data: session });
   },
 };
