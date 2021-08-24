@@ -3,6 +3,8 @@ const { sanitizer } = require('./sanitizer');
 const {
   getMenusForSession,
 } = require('../../../services/firebase/FIRMenuService');
+const { getItems } = require('../../../services/firebase/FIRItemService');
+const { propEq, find } = require('ramda');
 
 module.exports = {
   inputValidator,
@@ -17,7 +19,18 @@ module.exports = {
       organizationId,
       sessionId,
     });
+    const { data: items } = await getItems({ organizationId });
+    const menusWithItemData = menus.map((menu) => {
+      const itemData = menu.items.map((itemId) => {
+        const item = find(propEq('id', itemId))(items);
+        return {
+          itemName: item.name,
+        };
+      });
+      menu['items'] = itemData;
+      return menu;
+    });
 
-    return success({ data: menus });
+    return success({ data: menusWithItemData });
   },
 };
