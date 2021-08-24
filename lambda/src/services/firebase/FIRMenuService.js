@@ -55,6 +55,26 @@ const getMenuOverallRating = async ({ organizationId, menuId }) => {
   return overAllRating;
 };
 
+const getMenuItemRating = async ({
+  sessionId,
+  organizationId,
+  menuId,
+  itemId,
+}) => {
+  const { data: itemReviews } = await findByKeyValues(
+    review({ organizationId }),
+    {
+      key: 'searchId',
+      value: itemId,
+    }
+  );
+  const menuItemReviews = itemReviews.filter(
+    (review) => review.sessionId === sessionId && review.menuId === menuId
+  );
+  const menuRatings = pluck('rating', menuItemReviews);
+  const overAllRating = computeAverageRating(menuRatings);
+  return overAllRating;
+};
 module.exports = {
   createMenu,
   editMenu,
@@ -63,4 +83,5 @@ module.exports = {
   getMenuById,
   getCurrentMenuForSession,
   getMenuOverallRating,
+  getMenuItemRating,
 };
