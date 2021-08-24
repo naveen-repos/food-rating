@@ -15,7 +15,14 @@ module.exports = {
   }) => {
     const { data: review } = await storeMenuReview({
       organizationId,
-      review: { rating, comment, menuId, sessionId, type: 'menu' },
+      review: {
+        rating,
+        comment,
+        menuId,
+        sessionId,
+        type: 'menu',
+        searchId: menuId,
+      },
     });
     return success({ data: review });
   },

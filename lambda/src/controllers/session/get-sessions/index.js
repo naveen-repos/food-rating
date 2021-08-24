@@ -2,9 +2,11 @@ const { sanitizer } = require('./sanitizer');
 const {
   getOrganizationSessions,
 } = require('../../../services/firebase/FIRSessionService');
-// const {
-//   getCurrentMenuForSession,
-// } = require('../../../services/firebase/FIRMenuService');
+const {
+  getCurrentMenuForSession,
+  getMenuOverallRating,
+} = require('../../../services/firebase/FIRMenuService');
+const { isEmpty } = require('ramda');
 
 module.exports = {
   sanitizer,
@@ -16,16 +18,23 @@ module.exports = {
     const { data: sessions } = await getOrganizationSessions({
       organizationId,
     });
-    // const menusWithSessionIds = await Promise.all(
-    //   sessions.map(async ({ id: sessionId }) => {
-    //     const { data: menu } = await getCurrentMenuForSession({
-    //       organizationId,
-    //       sessionId,
-    //     });
-    //     return [sessionId, menu];
-    //   })
-    // );
+    const sessionsWithMenus = await Promise.all(
+      sessions.map(async (session) => {
+        const { data: menu } = await getCurrentMenuForSession({
+          organizationId,
+          sessionId: session.id,
+        });
+        let overAllRating = 0;
+        if (!isEmpty(menu)) {
+          overAllRating = await getMenuOverallRating({
+            organizationId,
+            menuId: menu.id,
+          });
+        }
+        return { session, menu, overAllRating };
+      })
+    );
 
-    return success({ data: sessions });
+    return success({ data: sessionsWithMenus });
   },
 };

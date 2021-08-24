@@ -1,4 +1,4 @@
-const { values } = require('ramda');
+const { values, pluck } = require('ramda');
 const moment = require('moment-timezone');
 const {
   create,
@@ -6,8 +6,10 @@ const {
   remove,
   fetch,
   findById,
+  findByKeyValues,
 } = require('./FIRModelService');
-const { menu } = require('./model-paths');
+const { menu, review } = require('./model-paths');
+const { computeAverageRating } = require('../../utils/helper-utils');
 
 const createMenu = ({ sessionId, organizationId, items, day }) =>
   create(menu({ organizationId, sessionId }), {
@@ -40,6 +42,19 @@ const getCurrentMenuForSession = async ({ sessionId, organizationId }) => {
   return { data: todaysMenu[0] || {}, message: null };
 };
 
+const getMenuOverallRating = async ({ organizationId, menuId }) => {
+  const { data: menuReviews } = await findByKeyValues(
+    review({ organizationId }),
+    {
+      key: 'searchId',
+      value: menuId,
+    }
+  );
+  const menuRatings = pluck('rating', menuReviews);
+  const overAllRating = computeAverageRating(menuRatings);
+  return overAllRating;
+};
+
 module.exports = {
   createMenu,
   editMenu,
@@ -47,4 +62,5 @@ module.exports = {
   getMenusForSession,
   getMenuById,
   getCurrentMenuForSession,
+  getMenuOverallRating,
 };

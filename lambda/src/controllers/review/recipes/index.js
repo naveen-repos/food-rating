@@ -17,7 +17,7 @@ module.exports = {
       reviews.map((review) =>
         storeRecipeReview({
           organizationId,
-          review: { ...review, type: 'item' },
+          review: { ...review, type: 'item', searchId: review.itemId },
         })
       )
     );
