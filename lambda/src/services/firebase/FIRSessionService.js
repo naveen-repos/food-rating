@@ -33,9 +33,17 @@ const getOrganizationSessions = async ({ organizationId }) => {
 const deleteOrganizationSessions = ({ organizationId, sessionId }) =>
   update(session({ organizationId }), { id: sessionId, status: 'DELETED' });
 
+const organizationOnboarding = ({ organizationId, sessions }) =>
+  Promise.all(
+    sessions.map(({ name, startTime }) =>
+      createOrganizationSession({ name, startTime, organizationId })
+    )
+  );
+
 module.exports = {
   createOrganizationSession,
   updateOrganizationSession,
   getOrganizationSessions,
   deleteOrganizationSessions,
+  organizationOnboarding,
 };

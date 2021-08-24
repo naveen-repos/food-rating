@@ -1,4 +1,5 @@
 const { values } = require('ramda');
+const moment = require('moment-timezone');
 const {
   create,
   update,
@@ -28,10 +29,22 @@ const getMenusForSession = async ({ sessionId, organizationId }) => {
 const getMenuById = ({ organizationId, sessionId, menuId }) =>
   findById(menu({ sessionId, organizationId }), menuId);
 
+const getCurrentMenuForSession = async ({ sessionId, organizationId }) => {
+  const { data: sessionMenus } = await getMenusForSession({
+    sessionId,
+    organizationId,
+  });
+  const todaysMenu = sessionMenus.filter((menu) =>
+    moment(menu.day).isSame(moment(), 'day')
+  );
+  return { data: todaysMenu[0] || {}, message: null };
+};
+
 module.exports = {
   createMenu,
   editMenu,
   deleteMenu,
   getMenusForSession,
   getMenuById,
+  getCurrentMenuForSession,
 };

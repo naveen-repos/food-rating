@@ -83,7 +83,7 @@ const executeController = ({
       return;
     } catch (err) {
       console.log({ err });
-      return serverError(err);
+      return serverError();
     }
   };
 };
