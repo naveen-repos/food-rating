@@ -1,7 +1,6 @@
 const {
   getOrganizationById,
 } = require('../services/firebase/FIROrganizationService');
-const { auth } = require('../services/firebase/firebase').Firebase();
 
 const parseInputFromRequest = (req) => {
   return { ...req.params, ...req.query, ...req.body };
@@ -23,6 +22,7 @@ const validator = ({ inputs = {}, inputValidator }) => {
 
 const fetchUserFromToken = async (token) => {
   try {
+    const { auth } = require('../services/firebase/firebase').Firebase();
     const decodedTokenData = await auth().verifyIdToken(token);
     const { uid: orgId } = decodedTokenData;
     return await getOrganizationById(orgId);
