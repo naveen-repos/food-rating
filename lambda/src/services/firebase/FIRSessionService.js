@@ -1,4 +1,5 @@
 const { values, filter, propEq, pipe } = require('ramda');
+const moment = require('moment');
 const { create, update, fetch } = require('./FIRModelService');
 const { session } = require('./model-paths');
 
@@ -40,10 +41,24 @@ const organizationOnboarding = ({ organizationId, sessions }) =>
     )
   );
 
+const computeSessionMenuTime = ({ session: { startTime }, menu: { day } }) =>
+  moment()
+    .set({
+      year: moment(day).get('year'),
+      month: moment(day).get('month'),
+      date: moment(day).get('date'),
+      hour: moment(startTime).get('hour'),
+      minute: moment(startTime).get('minute'),
+      second: moment(startTime).get('second'),
+      millisecond: moment(startTime).get('millisecond'),
+    })
+    .valueOf();
+
 module.exports = {
   createOrganizationSession,
   updateOrganizationSession,
   getOrganizationSessions,
   deleteOrganizationSessions,
   organizationOnboarding,
+  computeSessionMenuTime,
 };

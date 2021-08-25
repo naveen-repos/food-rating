@@ -5,6 +5,7 @@ const computeAverageRating = (arr) => {
     return 0;
   }
   let totalRating = sum(arr);
+
   if (totalRating <= 0) {
     return 0;
   }

@@ -1,4 +1,4 @@
-const { values, pluck } = require('ramda');
+const { values, pluck, pipe, reject, isNil } = require('ramda');
 const moment = require('moment-timezone');
 const {
   create,
@@ -68,10 +68,11 @@ const getMenuItemRating = async ({
       value: itemId,
     }
   );
+
   const menuItemReviews = itemReviews.filter(
     (review) => review.sessionId === sessionId && review.menuId === menuId
   );
-  const menuRatings = pluck('rating', menuItemReviews);
+  const menuRatings = pipe(pluck('rating'), reject(isNil))(menuItemReviews);
   const overAllRating = computeAverageRating(menuRatings);
   return overAllRating;
 };

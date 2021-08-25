@@ -1,6 +1,7 @@
 const { sanitizer } = require('./sanitizer');
 const {
   getOrganizationSessions,
+  computeSessionMenuTime,
 } = require('../../../services/firebase/FIRSessionService');
 const {
   getCurrentMenuForSession,
@@ -25,13 +26,15 @@ module.exports = {
           sessionId: session.id,
         });
         let overAllRating = 0;
+        let sessionTime = 0;
         if (!isEmpty(menu)) {
           overAllRating = await getMenuOverallRating({
             organizationId,
             menuId: menu.id,
           });
+          sessionTime = computeSessionMenuTime({ session, menu });
         }
-        return { session, menu, overAllRating };
+        return { session, menu, overAllRating, sessionTime };
       })
     );
 

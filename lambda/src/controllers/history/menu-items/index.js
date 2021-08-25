@@ -39,6 +39,7 @@ module.exports = {
         return {
           overallRating: itemOverallRating,
           itemName: item.name,
+          itemId: item.id,
           categoryName: cat.name,
         };
       })

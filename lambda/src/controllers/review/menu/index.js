@@ -9,7 +9,7 @@ module.exports = {
   sanitizer,
   authorizationRequired: false,
   fn: async ({
-    inputs: { rating, comment, menuId, sessionId },
+    inputs: { rating, menuId, sessionId },
     responses: { success },
     organization: { id: organizationId },
   }) => {
@@ -17,7 +17,6 @@ module.exports = {
       organizationId,
       review: {
         rating,
-        comment,
         menuId,
         sessionId,
         type: 'menu',

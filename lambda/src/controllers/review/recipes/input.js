@@ -10,6 +10,8 @@ const review = Joi.object({
   reviewTags: Joi.array(),
 });
 
-const inputValidator = Joi.array().items(review).required();
+const inputValidator = Joi.object({
+  reviews: Joi.array().items(review).required(),
+});
 
 module.exports = { inputValidator };
