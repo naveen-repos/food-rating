@@ -5,7 +5,7 @@ const { editMenu } = require('../../../services/firebase/FIRMenuService');
 module.exports = {
   inputValidator,
   sanitizer,
-  authorizationRequired: false,
+  authorizationRequired: true,
   fn: async ({
     inputs: { items, day, sessionId, menuId },
     responses: { success, clientError },

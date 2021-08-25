@@ -5,7 +5,7 @@ const { createItem } = require('../../../services/firebase/FIRItemService');
 module.exports = {
   inputValidator,
   sanitizer,
-  authorizationRequired: false,
+  authorizationRequired: true,
   fn: async ({
     inputs: { name, categoryId },
     responses: { success },

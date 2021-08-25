@@ -13,7 +13,7 @@ const {
 module.exports = {
   inputValidator,
   sanitizer,
-  authorizationRequired: false,
+  authorizationRequired: true,
   fn: async ({
     inputs: { sessionId, menuId },
     responses: { success },

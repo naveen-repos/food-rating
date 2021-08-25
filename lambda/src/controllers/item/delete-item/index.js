@@ -5,7 +5,7 @@ const { deleteItem } = require('../../../services/firebase/FIRItemService');
 module.exports = {
   inputValidator,
   sanitizer,
-  authorizationRequired: false,
+  authorizationRequired: true,
   fn: async ({
     inputs: { itemId },
     responses: { success, clientError },

@@ -10,7 +10,7 @@ const { isEmpty, flatten } = require('ramda');
 
 module.exports = {
   sanitizer,
-  authorizationRequired: false,
+  authorizationRequired: true,
   fn: async ({
     responses: { success },
     organization: { id: organizationId },
