@@ -4,7 +4,7 @@ const {
   getMenusForSession,
 } = require('../../../services/firebase/FIRMenuService');
 const { getItems } = require('../../../services/firebase/FIRItemService');
-const { propEq, find } = require('ramda');
+const { propEq, find, pick } = require('ramda');
 
 module.exports = {
   inputValidator,
@@ -23,7 +23,7 @@ module.exports = {
     const menuWithItemNames = menus.map((menu) => {
       const itemData = menu.items.map((itemId) => {
         const item = find(propEq('id', itemId))(items);
-        return item.name;
+        return pick(['id', 'name'], item);
       });
       menu['items'] = itemData;
       return menu;
