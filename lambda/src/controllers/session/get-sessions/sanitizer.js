@@ -14,7 +14,7 @@ const sessionCard = applySpec({
   menuId: pathOr('', ['menu', 'id']),
   sessionStatus: pipe(
     pathOr('', ['menu', 'id']),
-    ifElse(isEmpty, always('NO_MENU'), always('ON_GOING'))
+    ifElse(isEmpty, always('No menu'), always('Ongoing'))
   ),
   items: pathOr([], ['menu', 'items']),
   itemsCount: pipe(pathOr([], ['menu', 'items']), length),

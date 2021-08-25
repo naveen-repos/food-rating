@@ -7,7 +7,7 @@ const {
 module.exports = {
   inputValidator,
   sanitizer,
-  authorizationRequired: true,
+  authorizationRequired: false,
   fn: async ({
     inputs: { name, adminName, email, type, organizationId },
     responses: { success },
