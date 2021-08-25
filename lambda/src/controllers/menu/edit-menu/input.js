@@ -1,4 +1,4 @@
-const Joi = require('Joi');
+const Joi = require('joi');
 const inputValidator = Joi.object({
   day: Joi.number(),
   items: Joi.array().items(Joi.string().required()),
