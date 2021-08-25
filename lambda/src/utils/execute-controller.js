@@ -63,7 +63,7 @@ const executeController = ({
         if (!req.headers.authorization) {
           return clientError({ message: 'Missing authorization' });
         }
-        const { data: organizationData, error: authorizationError } =
+        const { data: organizationData, message: authorizationError } =
           await fetchUserFromToken(req.headers.authorization);
 
         if (authorizationError) {

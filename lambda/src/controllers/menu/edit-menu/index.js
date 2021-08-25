@@ -1,6 +1,9 @@
 const { inputValidator } = require('./input');
 const { sanitizer } = require('./sanitizer');
-const { editMenu } = require('../../../services/firebase/FIRMenuService');
+const {
+  editMenu,
+  getMenuById,
+} = require('../../../services/firebase/FIRMenuService');
 
 module.exports = {
   inputValidator,
@@ -11,6 +14,14 @@ module.exports = {
     responses: { success, clientError },
     organization: { id: organizationId },
   }) => {
+    const { message: getMenuError } = await getMenuById({
+      sessionId,
+      menuId,
+      organizationId,
+    });
+    if (getMenuError) {
+      return clientError({ message: getMenuError });
+    }
     const { data: updatedMenu, message: updateMenuError } = await editMenu({
       sessionId,
       menuId,
@@ -20,7 +31,7 @@ module.exports = {
     });
 
     if (updateMenuError) {
-      clientError({ message: updateMenuError });
+      return clientError({ message: updateMenuError });
     }
     return success({ data: updatedMenu });
   },
