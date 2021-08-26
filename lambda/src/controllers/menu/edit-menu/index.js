@@ -4,6 +4,7 @@ const {
   editMenu,
   getMenuById,
 } = require('../../../services/firebase/FIRMenuService');
+const { uniq } = require('ramda');
 
 module.exports = {
   inputValidator,
@@ -26,7 +27,7 @@ module.exports = {
       sessionId,
       menuId,
       organizationId,
-      items,
+      items: uniq(items),
       day,
     });
 

@@ -1,6 +1,7 @@
 const { inputValidator } = require('./input');
 const { sanitizer } = require('./sanitizer');
 const { createMenu } = require('../../../services/firebase/FIRMenuService');
+const { uniq } = require('ramda');
 
 module.exports = {
   inputValidator,
@@ -14,7 +15,7 @@ module.exports = {
     console.log('Reached add menu');
     console.log({ items, day, sessionId });
     const { data: menu } = await createMenu({
-      items,
+      items: uniq(items),
       day,
       sessionId,
       organizationId,
