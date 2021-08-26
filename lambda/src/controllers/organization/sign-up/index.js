@@ -9,8 +9,9 @@ module.exports = {
   sanitizer,
   authorizationRequired: false,
   fn: async ({
-    inputs: { name, adminName, email, type, organizationId },
+    inputs: { name, adminName, email, type },
     responses: { success },
+    organization: { id: organizationId },
   }) => {
     const { data: organization } = await addOrganization({
       organizationId,
