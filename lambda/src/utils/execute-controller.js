@@ -1,6 +1,6 @@
-const {
-  getOrganizationById,
-} = require('../services/firebase/FIROrganizationService');
+// const {
+//   getOrganizationById,
+// } = require('../services/firebase/FIROrganizationService');
 
 const parseInputFromRequest = (req) => {
   return { ...req.params, ...req.query, ...req.body };
@@ -25,7 +25,8 @@ const fetchUserFromToken = async (token) => {
     const { auth } = require('../services/firebase/firebase').Firebase();
     const decodedTokenData = await auth().verifyIdToken(token);
     const { uid: orgId } = decodedTokenData;
-    return await getOrganizationById(orgId);
+    //facing error at the user sign-in
+    return { data: { id: orgId } }; //await getOrganizationById(orgId);
   } catch (err) {
     return { data: null, message: err.message };
   }
