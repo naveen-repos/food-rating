@@ -28,6 +28,7 @@ const fetchUserFromToken = async (token) => {
     //facing error at the user sign-in
     return { data: { id: orgId } }; //await getOrganizationById(orgId);
   } catch (err) {
+    console.error(err);
     return { data: null, message: err.message };
   }
 };
