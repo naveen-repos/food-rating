@@ -3,7 +3,7 @@ const awsServerlessExpress = !isTestingEnvironment
   ? require('aws-serverless-express')
   : require('./server');
 const app = require('./server');
-const { pickAll } = require('./ramda');
+const { pickAll } = require('ramda');
 
 const binaryMimeTypes = [];
 const server = awsServerlessExpress.createServer(app, null, binaryMimeTypes);
