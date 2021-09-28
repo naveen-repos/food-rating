@@ -9,6 +9,7 @@ const { getItems } = require('../../../services/firebase/FIRItemService');
 const {
   getCategories,
 } = require('../../../services/firebase/FIRCategoryService');
+const { round } = require('lodash');
 
 module.exports = {
   inputValidator,
@@ -28,19 +29,21 @@ module.exports = {
     const { data: categories } = await getCategories({ organizationId });
     const itemRatings = await Promise.all(
       menu.items.map(async (itemId) => {
-        const itemOverallRating = await getMenuItemRating({
-          sessionId,
-          organizationId,
-          menuId,
-          itemId,
-        });
+        const { itemOverallRating, count: itemReviewCount } =
+          await getMenuItemRating({
+            sessionId,
+            organizationId,
+            menuId,
+            itemId,
+          });
         const item = find(propEq('id', itemId))(items);
         const cat = find(propEq('id', item.categoryId))(categories);
         return {
-          overallRating: itemOverallRating,
+          overallRating: round(itemOverallRating),
           itemName: item.name,
           itemId: item.id,
           categoryName: cat.name,
+          itemReviewCount,
         };
       })
     );

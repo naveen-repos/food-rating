@@ -7,6 +7,7 @@ const {
   getMenusForSession,
 } = require('../../../services/firebase/FIRMenuService');
 const { isEmpty, flatten } = require('ramda');
+const { round, orderBy } = require('lodash');
 
 module.exports = {
   sanitizer,
@@ -28,17 +29,24 @@ module.exports = {
         return await Promise.all(
           menus.map(async (menu) => {
             let overAllRating = 0;
+            let reviewsCount = 0;
             if (!isEmpty(menu)) {
-              overAllRating = await getMenuOverallRating({
+              const {
+                count: menuRatingsCount,
+                overAllRating: menuOverAllRating,
+              } = await getMenuOverallRating({
                 organizationId,
                 menuId: menu.id,
               });
+              reviewsCount = menuRatingsCount;
+              overAllRating = round(menuOverAllRating);
             }
             return {
               sessionId: session.id,
               sessionName: session.name,
               menuId: menu.id,
               day: menu.day,
+              reviewsCount,
               overAllRating,
             };
           })
@@ -46,6 +54,6 @@ module.exports = {
       })
     );
 
-    return success({ data: flatten(history) });
+    return success({ data: orderBy(flatten(history), 'day', ['desc']) });
   },
 };

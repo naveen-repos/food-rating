@@ -27,14 +27,18 @@ module.exports = {
         });
         let overAllRating = 0;
         let sessionTime = 0;
+        let reviewsCount = 0;
         if (!isEmpty(menu)) {
-          overAllRating = await getMenuOverallRating({
-            organizationId,
-            menuId: menu.id,
-          });
+          const { count: menuRatingsCount, overAllRating: menuOverAllRating } =
+            await getMenuOverallRating({
+              organizationId,
+              menuId: menu.id,
+            });
+          reviewsCount = menuRatingsCount;
+          overAllRating = menuOverAllRating;
           sessionTime = computeSessionMenuTime({ session, menu });
         }
-        return { session, menu, overAllRating, sessionTime };
+        return { session, menu, overAllRating, sessionTime, reviewsCount };
       })
     );
 

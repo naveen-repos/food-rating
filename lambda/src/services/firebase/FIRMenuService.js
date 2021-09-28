@@ -51,8 +51,9 @@ const getMenuOverallRating = async ({ organizationId, menuId }) => {
     }
   );
   const menuRatings = pluck('rating', menuReviews);
+  const count = menuReviews.length;
   const overAllRating = computeAverageRating(menuRatings);
-  return overAllRating;
+  return { overAllRating, count };
 };
 
 const getMenuItemRating = async ({
@@ -72,8 +73,8 @@ const getMenuItemRating = async ({
   const menuItemReviews = itemReviews.filter(
     (review) => review.sessionId === sessionId && review.menuId === menuId
   );
-  const menuRatings = pipe(pluck('rating'), reject(isNil))(menuItemReviews);
-  const overAllRating = computeAverageRating(menuRatings);
+  const menuItemRatings = pipe(pluck('rating'), reject(isNil))(menuItemReviews);
+  const overAllRating = computeAverageRating(menuItemRatings);
   return overAllRating;
 };
 module.exports = {
