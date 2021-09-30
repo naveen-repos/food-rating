@@ -5,6 +5,7 @@ const {
 } = require('../../../services/firebase/FIRMenuService');
 const { getItems } = require('../../../services/firebase/FIRItemService');
 const { propEq, find, pick } = require('ramda');
+const { orderBy } = require('lodash');
 
 module.exports = {
   inputValidator,
@@ -29,6 +30,6 @@ module.exports = {
       return menu;
     });
 
-    return success({ data: menuWithItemNames });
+    return success({ data: orderBy(menuWithItemNames, 'day', ['desc']) });
   },
 };
